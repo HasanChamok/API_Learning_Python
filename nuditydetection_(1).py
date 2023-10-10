@@ -21,7 +21,6 @@ image = tf.keras.preprocessing.image
 
 batch_size=20
 
-"""# Extracting Features"""
 
 def extract_features(img_paths, batch_size=batch_size):
 
@@ -50,7 +49,7 @@ X_test = extract_features(
 )
 y_test = np.array([1] * len(Nude) + [0] * len(Decent))
 
-"""# Training the model"""
+
 
 def train():
     model = tf.keras.models.Sequential([
@@ -86,7 +85,7 @@ history = model.fit(X_train, y_train,
                     batch_size=batch_size,
                     epochs=epochs)
 
-"""# Training and Loss Graph"""
+
 
 plt.plot(range(1,epochs+1), history.history['accuracy'], label='train')
 plt.plot(range(1,epochs+1), history.history['val_accuracy'], label='test')
@@ -96,11 +95,9 @@ plt.plot(range(1,epochs+1), history.history['loss'], label='train loss')
 plt.plot(range(1,epochs+1), history.history['val_loss'], label='test loss')
 plt.legend()
 
-"""# Prediction"""
 
 import cv2
 
-"""# Detecting Nude image"""
 
 X_test = extract_features(
     list(map(lambda x: '../input/my-nsfw-dataset/test/test/NSFW (2).jpg' , test))
@@ -114,12 +111,6 @@ elif(y_pred<0.5).all():
 else:
     print("Invalid Image")
 
-"""**Our model has detected it accurately as Nudity. The image can't be displayed here as it is a sensual content**
-
-# Safe Image
-
-**These are the safe images that we use for testing**
-"""
 
 plt.imshow(cv2.imread('../input/safeee/s1.jpg'))
 
@@ -148,8 +139,3 @@ elif(y_pred<0.5).all():
     print("Safe to use")
 else:
     print("Invalid Image")
-
-"""**Model tells that the above two images are safe images which is precise.**
-
-# Overall our model predicts accurately with an accuracy of around 93%
-"""
